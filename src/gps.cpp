@@ -10,7 +10,6 @@ void GPS_Class::init()
 
 void GPS_Class::encode()
 {       
-    int data;
     unsigned long previousMillis = millis();
 
     while((previousMillis + 100) > millis())
