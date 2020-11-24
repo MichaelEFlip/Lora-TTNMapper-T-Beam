@@ -42,7 +42,7 @@ axp_chgled_mode_t ledMode = AXP20X_LED_LOW_LEVEL;
 
 uint8_t txBuffer[9];
 uint16_t txBuffer2[5];
-gps gps;
+GPS_Class gps;
 Preferences prefs;
 
 #ifndef OTAA

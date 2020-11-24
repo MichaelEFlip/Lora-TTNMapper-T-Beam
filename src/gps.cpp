@@ -2,13 +2,13 @@
 
 HardwareSerial GPSSerial(1);
 
-void gps::init()
+void GPS_Class::init()
 {
   GPSSerial.begin(9600, SERIAL_8N1, GPS_TX, GPS_RX);
   GPSSerial.setTimeout(2);
 }
 
-void gps::encode()
+void GPS_Class::encode()
 {       
     int data;
     unsigned long previousMillis = millis();
@@ -25,7 +25,7 @@ void gps::encode()
      //Serial.println("");
 }
 
-void gps::buildPacket(uint8_t txBuffer[9])
+void GPS_Class::buildPacket(uint8_t txBuffer[9])
 {
   LatitudeBinary = ((tGps.location.lat() + 90) / 180.0) * 16777215;
   LongitudeBinary = ((tGps.location.lng() + 180) / 360.0) * 16777215;
@@ -52,7 +52,7 @@ void gps::buildPacket(uint8_t txBuffer[9])
   txBuffer[8] = hdopGps & 0xFF;
 }
 
-void gps::gdisplay(uint16_t txBuffer2[5])
+void GPS_Class::gdisplay(uint16_t txBuffer2[5])
 {
   txBuffer2[0] = tGps.satellites.value();
   txBuffer2[1] = tGps.speed.kmph();
@@ -61,7 +61,7 @@ void gps::gdisplay(uint16_t txBuffer2[5])
   txBuffer2[4] = tGps.hdop.value()/10;
 }
 
-bool gps::checkGpsFix()
+bool GPS_Class::checkGpsFix()
 {
   encode();
   if (tGps.location.isValid() && 
