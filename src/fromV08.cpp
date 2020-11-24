@@ -63,6 +63,9 @@ unsigned long lastMillis2 = 0;
 // For battery mesurement
 float VBAT;  // battery voltage from ESP32 ADC read
 
+void onEvent (ev_t ev);
+void do_send(osjob_t* j);
+
 const lmic_pinmap lmic_pins = {
   .nss = 18,
   .rxtx = LMIC_UNUSED_PIN,
