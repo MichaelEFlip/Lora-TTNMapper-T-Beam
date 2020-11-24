@@ -21,7 +21,7 @@ void GPS_Class::encode()
             //Serial.print(data);
         }
     }
-     //Serial.println("");
+     //Serial.println(F(""));
 }
 
 void GPS_Class::buildPacket(uint8_t txBuffer[9])
@@ -29,12 +29,23 @@ void GPS_Class::buildPacket(uint8_t txBuffer[9])
   LatitudeBinary = ((tGps.location.lat() + 90) / 180.0) * 16777215;
   LongitudeBinary = ((tGps.location.lng() + 180) / 360.0) * 16777215;
   
-  sprintf(t, "Lat: %f", tGps.location.lat());
+  snprintf(t,sizeof(t), "Lat: %f", tGps.location.lat());
   Serial.println(t);
   
-  sprintf(t, "Lng: %f", tGps.location.lng());
+  snprintf(t,sizeof(t), "Lng: %f", tGps.location.lng());
   Serial.println(t);
   
+  snprintf(t, sizeof(t), "Alt (m): %.2f", tGps.altitude.meters());
+  Serial.println(t);
+  
+  if (tGps.time.isValid())  {
+    snprintf(t,sizeof(t),"Time: %02u:%02u:%02u.%u",tGps.time.hour(),tGps.time.minute(),tGps.time.second(),tGps.time.centisecond());
+    Serial.println(t);
+  }
+
+   snprintf(t,sizeof(t),"Sat: %u HDOP: %.1f",tGps.satellites.value(), tGps.hdop.hdop());
+  Serial.println(t);
+
   txBuffer[0] = ( LatitudeBinary >> 16 ) & 0xFF;
   txBuffer[1] = ( LatitudeBinary >> 8 ) & 0xFF;
   txBuffer[2] = LatitudeBinary & 0xFF;
@@ -71,27 +82,26 @@ bool GPS_Class::checkGpsFix()
       tGps.altitude.isValid() && 
       tGps.altitude.age() < 4000 )
   {
-    Serial.println("Valid gps Fix.");
+    Serial.println(F("Valid gps Fix."));
     return true;
   }
   else
   {
-     Serial.println("No gps Fix.");
-//     sprintf(t, "location valid: %i" , tGps.location.isValid());
-//     Serial.println(t);
-//     sprintf(t, "location age: %i" , tGps.location.age());
-//     Serial.println(t);
-//     sprintf(t, "hdop valid: %i" , tGps.hdop.isValid());
-//     Serial.println(t);
-//     sprintf(t, "hdop age: %i" , tGps.hdop.age());
-//     Serial.println(t);
-//     sprintf(t, "hdop: %i" , tGps.hdop.value());
-//     Serial.println(t);
-//     sprintf(t, "altitude valid: %i" , tGps.altitude.isValid());
-//     Serial.println(t);
-//     sprintf(t, "altitude age: %i" , tGps.altitude.age());
-//     Serial.println(t);
-
+    Serial.println(F("No gps Fix."));
+    snprintf(t, sizeof(t), "location valid: %i" , tGps.location.isValid());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "location age: %i" , tGps.location.age());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "hdop valid: %i" , tGps.hdop.isValid());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "hdop age: %i" , tGps.hdop.age());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "hdop: %i" , tGps.hdop.value());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "altitude valid: %i" , tGps.altitude.isValid());
+    Serial.println(t);
+    snprintf(t, sizeof(t), "altitude age: %i" , tGps.altitude.age());
+    Serial.println(t);
     return false;
   }
 }
