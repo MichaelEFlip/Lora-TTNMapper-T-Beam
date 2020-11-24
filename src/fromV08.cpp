@@ -21,7 +21,6 @@ Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 // Powermanagement chip AXP192
 AXP20X_Class axp;
 bool axpIrq = 0;
-#define AXP192_SLAVE_ADDRESS 0x34
 const uint8_t axp_irq_pin = 35;
 
 String LoraStatus;
