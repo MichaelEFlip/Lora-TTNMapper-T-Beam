@@ -16,7 +16,7 @@
 #define SELECT_BTN 38
 
 #define OLED_RESET 4 // not used
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 
 // Powermanagement chip AXP192
 AXP20X_Class axp;
@@ -476,7 +476,7 @@ void setup()
   iv_set();
 
   pinMode(SELECT_BTN, INPUT); // UI Button
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C, 0, 21, 22, 800000);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   // set text color / Textfarbe setzen
   display.setTextColor(WHITE);
