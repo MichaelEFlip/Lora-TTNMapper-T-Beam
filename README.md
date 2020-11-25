@@ -1,22 +1,21 @@
 ## Intro
 
-This Fork from Bjoerns-TB, forked from DeuxVis, supports OLED display on the I²C interface on GPIO22 and GPI21. This repo contains a patched SSD1306 library from [smartnick](https://github.com/smartinick/Adafruit_SSD1306), enabling individual I²C pins and to set I²C Clock to 800kHz.
+This Fork from MichaelEFlip, forked from Bjoerns-TB, forked from DeuxVis, supports OLED display on the I²C interface on GPIO22 and GPI21.
 
 This is a simple sketch demonstrating the capability of the [TTGO T-Beam](https://www.aliexpress.com/store/product/TTGO-T-Beam-ESP32-433-868-915Mhz-WiFi-wireless-Bluetooth-Module-ESP-32-GPS-NEO-6M/2090076_32875743018.html) as a [TTN Mapper](https://ttnmapper.org/) Node on [The Things Network](https://www.thethingsnetwork.org/) LoraWAN.
 
 Derived from [sbiermann/Lora-TTNMapper-ESP32](https://github.com/sbiermann/Lora-TTNMapper-ESP32) and with some information/inspiration from [cyberman54/ESP32-Paxcounter](https://github.com/cyberman54/ESP32-Paxcounter) and [Edzelf/LoRa](https://github.com/Edzelf/LoRa).
-The forked repo from hottimuc was converted to a PlatformIO project (currently only for hardware revision >= 0.8).
 
 ## New features
 
 * GPS scan relaxed and done more "nonblocking"
-* more informations shown on status screen
-* animated GPS-fix-screen with satelite gfx
-* selectable datarate and power (button short press)
+* more information shown on status screen
+* animated GPS-fix-screen with satellite gfx
+* selectable data rate and power (button short press)
 * selectable transmit interval (button longer press)
 * selectable ADR-Mode (button even longer press)
 * selectable send-port to enable "on device" switch to experimental mapping (button even loooonger press)
-* support for newer HW-revisions (V08 / V0.8, V09 / V0.9, V10 / V1.0, with soft-power-button and powermanagement chip) (short press = power-on / dimm-mode; long press = power-off)
+* support for newer HW-revisions (V08 / V0.8, V09 / V0.9, V10 / V1.0, V1.1 with soft-power-button and power management chip) (short press = power-on / dimm-mode; long press = power-off)
 
 ![Start screen](images/sc_02.jpg)![GPS fix screen](images/sc_01.jpg)![Status screen](images/sc_03.jpg) 
 
@@ -26,13 +25,15 @@ The forked repo from hottimuc was converted to a PlatformIO project (currently o
 
 [TinyGPS++](http://arduiniana.org/libraries/tinygpsplus/)
 
-[LMIC-Arduino](https://github.com/matthijskooijman/arduino-lmic) : Make sure to get the last version - *1.5.0+arduino-2* currently - because the arduino IDE library updater is getting confused by the versioning scheme of that library.
+[MCCI Arduino LoRaWAN Library](https://github.com/mcci-catena/arduino-lorawan)
+
+[AXP202X_Library](https://github.com/lewisxhe/AXP202X_Library)
+
+[Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
 
 ## Instructions
 
-You can program the T-Beam using the [Arduino ESP32](https://github.com/espressif/arduino-esp32) board 't-beam'.
-
-You also need [this library](https://github.com/lewisxhe/AXP202X_Library) from Lewis He.
+Program the T-Beam using VS-Code or Atom with [PlatformIO](https://github.com/espressif/arduino-esp32) installed.
 
 On The Things Network side, the settings needed are available [here](https://www.thethingsnetwork.org/docs/applications/ttnmapper/).
 
